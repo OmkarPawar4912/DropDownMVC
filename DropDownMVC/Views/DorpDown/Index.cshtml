@@ -1,0 +1,53 @@
+﻿@model Database
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <span style="margin-right: 5px;">
+        @Html.DropDownListFor(Model => Model.Country.Name, new SelectList(ViewBag.Country, "Id", "Name"),
+    "Select Country", new { id = "ddCountry" })
+    </span>
+    <span style="margin-right: 5px;">
+        @Html.DropDownListFor(Model => Model.Distric.Name, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+    "Select Distric", new { id = "ddDistric" })
+    </span>
+    <span style="margin-right: 5px;">
+        @Html.DropDownListFor(Model => Model.City.Name, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+    "Select City", new { id = "ddCity" })
+    </span>
+
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#ddCountry").change(function () {
+            var id = $(this).val();
+            $("#ddDistric").empty();
+             $("#ddCity").empty();
+              var c = "<option>Select City</option>";
+              $("#ddCity").html(c);
+            $.get("../DorpDown/GetDistricByCountryId", { CountryId: id }, function (data) {
+                var v = "<option>Select Distric</option>";
+                $.each(data, function (i, v1) {
+                    v += "<option value=" + v1.value + ">" + v1.text + "</option>";
+                });
+                $("#ddDistric").html(v);
+            });
+        });
+
+        $("#ddDistric").change(function () {
+            var id = $(this).val();
+            $("#ddCity").empty();
+            $.get("../DorpDown/GetCityByDistricId", { districId: id }, function (data) {
+                var v = "<option>Select City</option>";
+                $.each(data, function (i, v1) {
+                    v += "<option value=" + v1.value + ">" + v1.text + "</option>";
+                });
+                $("#ddCity").html(v);
+            });
+        });
+    });
+</script>
