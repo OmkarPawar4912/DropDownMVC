@@ -8,6 +8,7 @@ namespace DropDownMVC.Controllers
 {
     public class DorpDownController : Controller
     {
+        //Load Country
         public IActionResult Index()
         {
             List<Country> countries = new List<Country>
@@ -20,6 +21,8 @@ namespace DropDownMVC.Controllers
             ViewBag.Country = countries;
             return View();
         }
+
+        //Load Distric (country wise)
         public JsonResult GetDistricByCountryId(int countryId)
         {
             var DistricList = GetDistric(countryId);
@@ -32,6 +35,7 @@ namespace DropDownMVC.Controllers
 
             return new JsonResult(DistricData);
         }
+        //Create Distric List
         private IList<Distric> GetDistric(int countryId)
         {
             IList<Distric> districs = new List<Distric>
@@ -50,6 +54,7 @@ namespace DropDownMVC.Controllers
             return districs.Where(m => m.CountryId == countryId).ToList();
         }
 
+        //Load Cit (Distric wise)
         public JsonResult GetCityByDistricId(int districId)
         {
             var CityList = GetCity(districId);
@@ -62,6 +67,8 @@ namespace DropDownMVC.Controllers
 
             return new JsonResult(CityData);
         }
+
+        //Create City List
         private IList<City> GetCity(int districId)
         {
             IList<City> city = new List<City>

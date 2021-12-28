@@ -1,6 +1,6 @@
 ﻿@model Database
 
-@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+@using (Html.BeginForm("GetSelectedValue", "Home", FormMethod.Post))
 {
     <span style="margin-right: 5px;">
         @Html.DropDownListFor(Model => Model.Country.Name, new SelectList(ViewBag.Country, "Id", "Name"),

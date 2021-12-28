@@ -23,6 +23,13 @@ namespace DropDownMVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        [Route("GetSelectedValue")]
+        public ActionResult GetSelectedValue(Database database)
+        {
+            var selectedValue = database; //this will get selected value
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
