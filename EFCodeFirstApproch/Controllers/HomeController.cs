@@ -1,4 +1,4 @@
-﻿using DropDownMVC.Models;
+﻿using EFCodeFirstApproch.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DropDownMVC.Controllers
+namespace EFCodeFirstApproch.Controllers
 {
     public class HomeController : Controller
     {
@@ -23,13 +23,6 @@ namespace DropDownMVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        [Route("GetSelectedValue")]
-        public ActionResult GetSelectedValue()
-        {
-            //var selectedValue = Request.Form["GetSelectedValue"].ToString(); ; //this will get selected value
-            return View();
-        }
         public IActionResult Privacy()
         {
             return View();
